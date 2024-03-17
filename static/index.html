@@ -12,19 +12,31 @@
    <div id="temperature"></div>
    <script>
     window.addEventListener('load', async () => {
-      async function getTemperature() {
-         const response = await axios.get('/data')
-         return response.data
+       
+       const updateTemperature = async () => {
+          async function getTemperature() {
+             const response = await axios.get('/data')
+             return response.data
+          }
+
+         const temperature = document.getElementById("temperature")
+         data = await getTemperature()
+         if (data.length === 0) {
+            temperature.innerHTML = "No sensors nearby."
+         } else {
+            parsedData = data.map(sensor=>{
+               return "<p></p>MAC: " + sensor.MAC +
+               "<br>Temperature: " + sensor.data.temperature +
+               "<br>Humidity: " + sensor.data.humidity +
+               "<br>Pressure: " + sensor.data.pressure +
+               "</p>"})
+            temperature.innerHTML = parsedData
+         }
       }
-      const temperature = document.getElementById("temperature")
-      data = await getTemperature()
-      parsedData = data.map(sensor=>{
-         return "<p></p>MAC: " + sensor.MAC +
-         "<br>Temperature: " + sensor.data.temperature +
-         "<br>Humidity: " + sensor.data.humidity +
-         "<br>Pressure: " + sensor.data.pressure +
-         "</p>"})
-      temperature.innerHTML = parsedData
+
+      updateTemperature()
+
+      setInterval(updateTemperature, 5000)
     })
    </script>
 </body>
