@@ -1,3 +1,4 @@
 python-dotenv
 ruuvitag_sensor
 tinydb
+flask
