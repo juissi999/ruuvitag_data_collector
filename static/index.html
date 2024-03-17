@@ -18,7 +18,13 @@
       }
       const temperature = document.getElementById("temperature")
       data = await getTemperature()
-      temperature.innerHTML = data.temperature
+      parsedData = data.map(sensor=>{
+         return "<p></p>MAC: " + sensor.MAC +
+         "<br>Temperature: " + sensor.data.temperature +
+         "<br>Humidity: " + sensor.data.humidity +
+         "<br>Pressure: " + sensor.data.pressure +
+         "</p>"})
+      temperature.innerHTML = parsedData
     })
    </script>
 </body>

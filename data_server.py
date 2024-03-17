@@ -19,8 +19,9 @@ def send_index():
     return app.send_static_file('index.html')
 
 @app.route('/data')
-def summary():
-    return {'temperature':1}
+def return_data():
+    data = db.all()
+    return data
 
 if __name__ == '__main__':  # pragma: no cover
     app.run(port=5050)
