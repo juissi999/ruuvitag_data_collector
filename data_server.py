@@ -24,4 +24,4 @@ def return_data():
     return data
 
 if __name__ == '__main__':  # pragma: no cover
-    app.run(port=5050)
+    app.run(debug=True, port=5050, host='0.0.0.0')
